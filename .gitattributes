@@ -1,3 +1,2 @@
 *.java linguist-detectable=true
-*.springboot linguist-detectable=true
-*.javascript linguist-detectable=false
+*.js linguist-detectable=false
