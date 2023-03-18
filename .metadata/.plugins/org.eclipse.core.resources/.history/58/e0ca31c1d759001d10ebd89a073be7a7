@@ -1,0 +1,15 @@
+package com.mindtree.omf.uis.service;
+
+import org.springframework.stereotype.Service;
+
+import com.mindtree.omf.uis.model.User;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+	public User saveOrder() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

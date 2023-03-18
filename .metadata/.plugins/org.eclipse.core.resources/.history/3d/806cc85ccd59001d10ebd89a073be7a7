@@ -1,0 +1,65 @@
+package com.mindtree.omf.oms.controller;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import com.mindtree.omf.oms.entity.Order;
+import com.mindtree.omf.oms.entity.User;
+import com.mindtree.omf.oms.service.OrderServiceImpl;
+
+@RestController
+@RequestMapping("/order")
+public class OrderController {
+	
+	@Autowired
+	OrderServiceImpl service;
+	
+	@PostMapping(value="/totalAmount", consumes = "application/json")
+	public String getTotalAmount(@RequestBody List<Integer> list) {
+		return service.getTotalAmount(list);
+	}
+	
+//	@PostMapping(value="/newOrder", consumes = "application/json")
+//	public Order saveOrderDetails(@RequestBody List<Integer> list) {
+//		return service.saveOrderDetails(list);
+//	}
+	
+	@PostMapping(value="/userOrder", consumes = "application/json")
+	public Order saveOrderDetails(@RequestBody User user) {
+		System.err.println(user.toString());
+		System.err.println(service.saveOrderDetails(user.getCuisineList()));
+		return service.saveOrderDetails(user.getCuisineList());
+	}
+	
+	@PutMapping(value="/{id}")
+	public void saveChangedOrderDetails(@PathVariable int id, @RequestBody List<Integer> list) {
+		 service.saveChangedOrderDetails(id, list);
+	}
+	
+	@GetMapping("/{id}")
+	public User findOrderDetails(@PathVariable int id) {
+		return service.findOrderDetails(id);
+	}
+	
+	@GetMapping("/all")
+	public List<Order> getAllOrders() {
+		return service.getAllOrders();
+	}
+	
+	@DeleteMapping("/{id}")
+	public void deleteOrder(@PathVariable int id) {
+		service.deleteOrder(id);
+	}
+}

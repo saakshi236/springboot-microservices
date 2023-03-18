@@ -1,0 +1,75 @@
+package com.mindtree.omf.rss;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.assertj.core.util.Arrays;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+
+import com.mindtree.omf.rss.controller.RestaurantController;
+import com.mindtree.omf.rss.entity.Restaurant;
+import com.mindtree.omf.rss.repository.CuisineRepository;
+import com.mindtree.omf.rss.repository.RestaurantRepository;
+import com.mindtree.omf.rss.service.RestaurantServiceImpl;
+
+@SpringBootTest
+@ExtendWith(MockitoExtension.class)
+@RunWith(JUnitPlatform.class)
+class RestaurantServiceImplTest {
+	
+	@InjectMocks
+	private RestaurantServiceImpl service;
+	
+	@Mock
+	RestaurantRepository restaurantRepository;
+	@Mock
+	CuisineRepository cuisineRepository;
+
+	@Test
+	void testGetRestaurants() {
+		List<Restaurant> restaurantList = new ArrayList<Restaurant>();
+		restaurantList.add(new Restaurant(1, "Test Name 1", "Test Loc", 10));
+		restaurantList.add(new Restaurant(2, "Test Name 2", "Test Loc", 10));
+		when(service.getRestaurants()).thenReturn(restaurantList);
+		
+		assertTrue(restaurantList.equals(service.getRestaurants()));
+	}
+
+	@Test
+	void testGetMenu() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testFilterByLocation() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testFilterByName() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testFilterByCuisine() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testGetCuisine() {
+		fail("Not yet implemented");
+	}
+
+}

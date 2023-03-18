@@ -1,0 +1,89 @@
+package com.mindtree.omf.oms;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.assertj.core.util.Arrays;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+
+import com.mindtree.omf.oms.entity.Cuisine;
+import com.mindtree.omf.oms.entity.Order;
+import com.mindtree.omf.oms.entity.Restaurant;
+import com.mindtree.omf.oms.service.OrderServiceImpl;
+
+class OrderServiceImplTest {
+	
+	@InjectMocks
+	private OrderServiceImpl service;
+	
+	private List<Restaurant> restaurantList = new ArrayList<Restaurant>();
+	private List<Order> orderList = new ArrayList<Order>();
+	private List<Cuisine> cuisineList = new ArrayList<Cuisine>();
+	private List<Integer> intList = new ArrayList<Integer>();
+	
+	String str = "Total amount: 0";
+
+	@BeforeEach
+	void setUp() throws Exception {
+		restaurantList.add(new Restaurant(1, "Test Name 1", "Test Loc", 10));
+		restaurantList.add(new Restaurant(2, "Test Name 2", "Test Loc", 10));
+		intList.add(1);
+	}
+
+	@Test
+	void testGetTotalAmount() {
+		when(service.getTotalAmount(intList).thenReturn(str);
+		assertTrue("Total amount:0".equals(service.getTotalAmount(intList)));
+	}
+
+	@Test
+	void testSaveOrderDetails() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testFindOrderDetails() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testGetAllOrders() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testDeleteOrder() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testSaveChangedOrderDetails() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testFetchDataAndSave() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testGetdeliveryDetail() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testDefaultSave() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testDefaultFetchAndSave() {
+		fail("Not yet implemented");
+	}
+
+}

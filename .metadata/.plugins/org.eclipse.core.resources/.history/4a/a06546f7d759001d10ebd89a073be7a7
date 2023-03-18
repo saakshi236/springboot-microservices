@@ -1,0 +1,45 @@
+package com.mindtree.omf.uis.controller;
+
+import java.util.Arrays;
+
+import org.aspectj.weaver.NewConstructorTypeMunger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import com.google.gson.Gson;
+import com.mindtree.omf.uis.model.Order;
+import com.mindtree.omf.uis.model.User;
+import com.mindtree.omf.uis.repository.UserRepository;
+import com.mindtree.omf.uis.service.UserServiceImpl;
+
+@RestController
+public class UserController {
+	
+	
+	
+	@Autowired
+	UserServiceImpl service;
+	
+	@Autowired
+	RestTemplate restTemplate;
+	
+	@PostMapping("/newOrder")
+	public User saveUser(@RequestBody User user) {
+		return service.saveOrder(user);
+	}
+	
+	@GetMapping("/{id}")
+	public User saveUser(@PathVariable int id) {
+		System.err.println("User->" + repository.findById(id).toString());
+		return repository.findById(id);
+	}
+
+}

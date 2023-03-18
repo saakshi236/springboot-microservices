@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;Restaurant.java&apos; to &apos;user-info-service/src/main/java/com.mindtree.omf.uis.model&apos;&#x0D;&#x0A;- Original project: &apos;restaurant-search-service&apos;&#x0D;&#x0A;- Destination element: &apos;user-info-service/src/main/java/com.mindtree.omf.uis.model&apos;&#x0D;&#x0A;- Original element: &apos;com.mindtree.omf.rss.entity.Restaurant.java&apos;" description="Copy compilation unit" destination="=user-info-service/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.mindtree.omf.uis.model" element1="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.mindtree.omf.rss.entity{Restaurant.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1667205571619" units="1" version="1.0"/>
+</session>

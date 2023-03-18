@@ -1,0 +1,70 @@
+package com.mindtree.omf.oms;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.servlet.MockMvc;
+
+import com.mindtree.omf.oms.controller.OrderController;
+import com.mindtree.omf.oms.service.OrderServiceImpl;
+
+@SpringBootTest
+@ExtendWith(MockitoExtension.class)
+@RunWith(JUnit4.class)
+public class OrderControllerTest {
+	
+	@Autowired
+	private MockMvc mvc;
+	
+	@InjectMocks
+	private OrderController controller;
+	
+	@Mock
+	OrderServiceImpl service;
+	
+	private final String URI = "http://localhost:9002/order";
+
+	@Test
+	public void testGetTotalAmount() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testSaveOrderDetails() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testSaveChangedOrderDetails() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testFindOrderDetails() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testGetAllOrders() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testDeleteOrder() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testGetdeliveryDetail() {
+		fail("Not yet implemented");
+	}
+}

@@ -1,0 +1,5 @@
+package com.mindtree.omf.oms.repository;
+
+public interface DeliveryRepository {
+
+}

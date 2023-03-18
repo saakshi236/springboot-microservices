@@ -1,0 +1,23 @@
+package com.mindtree.omf.oms.service;
+
+import java.util.List;
+
+import com.mindtree.omf.oms.entity.Order;
+import com.mindtree.omf.oms.entity.User;
+
+public interface OrderService {
+
+	String getTotalAmount(List<Integer> list);
+
+	Object findOrderDetails(int id);
+
+	List<Order> getAllOrders();
+
+	void deleteOrder(int id);
+
+	void saveChangedOrderDetails(int id, List<Integer> list);
+
+	void fetchDataAndSave(List<Integer> list, Order order);
+
+	Order saveOrderDetails(User user);
+}

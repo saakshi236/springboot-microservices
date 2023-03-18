@@ -1,0 +1,36 @@
+package com.mindtree.omf.userinfoservice;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+
+import com.mindtree.omf.uis.model.User;
+import com.mindtree.omf.uis.repository.UserRepository;
+import com.mindtree.omf.uis.service.UserServiceImpl;
+
+class UserServiceImplTest {
+	
+	@auto
+	private UserServiceImpl service;
+
+	@Mock
+	UserRepository restaurantRepository;
+	
+	private User user;
+
+	@Test
+	void testSaveOrder() {
+		when(service.saveOrder(any(User.class))).thenReturn(user);
+		assertTrue(user.equals(service.saveOrder(user)));
+	}
+
+	@Test
+	void testFindUser() {
+		fail("Not yet implemented");
+	}
+
+}

@@ -1,0 +1,5 @@
+package com.mindtree.omf.uis.service;
+
+public interface UserService {
+
+}

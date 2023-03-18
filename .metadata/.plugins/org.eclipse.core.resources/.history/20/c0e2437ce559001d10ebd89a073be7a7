@@ -1,0 +1,46 @@
+package com.mindtree.omf.userinfoservice;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.mindtree.omf.uis.model.User;
+import com.mindtree.omf.uis.repository.UserRepository;
+import com.mindtree.omf.uis.service.UserServiceImpl;
+
+@SpringBootTest
+@ExtendWith(MockitoExtension.class)
+@RunWith(JUnit4.class)
+class UserServiceImplTest {
+	
+	@InjectMocks
+	private UserServiceImpl service;
+
+	@Mock
+	UserRepository restaurantRepository;
+	
+	private User user;
+
+	@Test
+	void testSaveOrder() {
+		when(service.saveOrder(any(User.class))).thenReturn(user);
+		assertTrue(user.equals(service.saveOrder(user)));
+	}
+
+	@Test
+	void testFindUser() {
+		fail("Not yet implemented");
+	}
+
+}

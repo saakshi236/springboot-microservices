@@ -1,0 +1,97 @@
+package com.mindtree.omf.oms;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.List;
+
+import org.junit.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import com.google.gson.Gson;
+import com.mindtree.omf.oms.controller.OrderController;
+import com.mindtree.omf.oms.entity.Order;
+import com.mindtree.omf.oms.service.OrderServiceImpl;
+
+@AutoConfigureMockMvc
+@SpringBootTest
+@ExtendWith(MockitoExtension.class)
+@RunWith(JUnit4.class)
+public class OrderControllerTest {
+	
+	@Autowired
+	MockMvc mockMvc
+	
+	@InjectMocks
+	private OrderController controller;
+	
+	@Mock
+	OrderServiceImpl service;
+	
+	private final String URI = "http://localhost:9002/order";
+
+	@Test
+	public void testGetTotalAmount() {
+		assertTrue(true);
+	}
+
+	@Test
+	public void testSaveOrderDetails() {
+		assertTrue(true);
+	}
+
+	@Test
+	public void testSaveChangedOrderDetails() {
+		assertTrue(true);
+	}
+
+	@Test
+	public void testFindOrderDetails() throws Exception {
+		String uri = URI + "/1";
+		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri).contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andReturn();
+
+		int status = mvcResult.getResponse().getStatus();
+		assertEquals(200, status);
+		
+		String content = mvcResult.getResponse().getContentAsString();
+		Order order = new Gson().fromJson(content, Order.class);
+		assertTrue(order != null);
+	}
+
+	@Test
+	public void testGetAllOrders() throws Exception {
+		String uri = URI + "/all";
+		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri).contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andReturn();
+
+		int status = mvcResult.getResponse().getStatus();
+		assertEquals(200, status);
+		
+		String content = mvcResult.getResponse().getContentAsString();
+		List<Order> orderList = new Gson().fromJson(content, List.class);
+		assertTrue(!orderList.isEmpty());
+	}
+
+	@Test
+	public void testDeleteOrder() {
+		assertTrue(true);
+	}
+
+	@Test
+	public void testGetdeliveryDetail() {
+		assertTrue(true);
+	}
+}

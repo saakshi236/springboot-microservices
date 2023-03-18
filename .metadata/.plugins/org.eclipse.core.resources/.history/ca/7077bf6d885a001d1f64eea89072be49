@@ -1,0 +1,107 @@
+package com.mindtree.omf.oms;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.mindtree.omf.oms.entity.Cuisine;
+import com.mindtree.omf.oms.entity.Order;
+import com.mindtree.omf.oms.entity.Restaurant;
+import com.mindtree.omf.oms.repository.OrderRepository;
+import com.mindtree.omf.oms.service.OrderServiceImpl;
+
+@SpringBootTest
+@ExtendWith(MockitoExtension.class)
+class OrderServiceImplTest {
+	
+	@Mock
+	OrderServiceImpl service;
+	
+	@Mock
+	private OrderRepository repository;
+	
+	private List<Restaurant> restaurantList = new ArrayList<Restaurant>();
+	private List<Order> orderList = new ArrayList<Order>();
+	private List<Cuisine> cuisineList = new ArrayList<Cuisine>();
+	private List<Integer> intList = new ArrayList<Integer>();
+	private Order order = new Order();
+	
+	String str = "Total amount: 0";
+
+	@Before
+	void setUp() throws Exception {
+		restaurantList.add(new Restaurant(1, "Test Name 1", "Test Loc", 10));
+		restaurantList.add(new Restaurant(2, "Test Name 2", "Test Loc", 10));
+		cuisineList.add(new Cuisine("Test Cuisine 1", 11, 1));
+		cuisineList.add(new Cuisine("Test Cuisine 2", 22, 2));
+		order = new Order(1, "Test name", "Test restraunt", 20, "Test address", cuisineList);
+		orderList.add(order);
+		intList.add(1);
+	}
+
+	@Test
+	void testGetTotalAmount() {
+		when(service.getTotalAmount(any(List.class))).thenReturn(str);
+		assertTrue("Total amount: 0".equals(service.getTotalAmount(intList)));
+	}
+
+//	@Test
+//	void testSaveOrderDetails() {
+//		fail("Not yet implemented");
+//	}
+//
+	@Test
+	void testFindOrderDetails() {
+		when(service.findOrderDetails(any(Integer.class))).thenReturn(order);
+		assertTrue(order.equals(service.findOrderDetails(1)));
+	}
+
+	@Test
+	void testGetAllOrders() {
+		when(service.getAllOrders()).thenReturn(order);
+		assertTrue(order.equals(service.findOrderDetails(1)));
+	}
+//
+//	@Test
+//	void testDeleteOrder() {
+//		fail("Not yet implemented");
+//	}
+//
+//	@Test
+//	void testSaveChangedOrderDetails() {
+//		fail("Not yet implemented");
+//	}
+//
+//	@Test
+//	void testFetchDataAndSave() {
+//		fail("Not yet implemented");
+//	}
+//
+//	@Test
+//	void testGetdeliveryDetail() {
+//		fail("Not yet implemented");
+//	}
+//
+//	@Test
+//	void testDefaultSave() {
+//		fail("Not yet implemented");
+//	}
+//
+//	@Test
+//	void testDefaultFetchAndSave() {
+//		fail("Not yet implemented");
+//	}
+
+}

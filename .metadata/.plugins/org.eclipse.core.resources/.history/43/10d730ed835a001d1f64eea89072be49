@@ -1,0 +1,111 @@
+package com.mindtree.omf.oms;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import com.google.gson.Gson;
+import com.mindtree.omf.oms.controller.OrderController;
+import com.mindtree.omf.oms.entity.Cuisine;
+import com.mindtree.omf.oms.entity.Order;
+import com.mindtree.omf.oms.repository.OrderRepository;
+import com.mindtree.omf.oms.service.OrderServiceImpl;
+
+@AutoConfigureWebTestClient
+@AutoConfigureMockMvc
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@ExtendWith(MockitoExtension.class)
+class OrderControllerTests {
+
+	@InjectMocks
+	private OrderController controller;
+
+	@Mock
+	OrderServiceImpl service;
+	
+	@Mock
+	OrderRepository repository;
+
+	@Autowired
+	private MockMvc mvc;
+	
+	private List<Order> orderList = new ArrayList<Order>();
+	private List<Cuisine> cuisineList = new ArrayList<Cuisine>();
+
+	private final String URI = "http://localhost:9002/order";
+
+	@BeforeEach
+	void setUp() throws Exception {
+		cuisineList.add(new Cuisine(1, "Test Cuisine 1", 11, 1));
+		cuisineList.add(new Cuisine(2, "Test Cuisine 2", 22, 2));
+		orderList.add(new Order(1, "Test", "Test Restaurant", 20, "Test address", cuisineList));
+	}
+
+	@Test
+	void testGetTotalAmount() throws Exception {
+		String uri = URI + "//deliveryDetail/1";
+		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri).contentType(MediaType.APPLICATION_JSON_VALUE)).andReturn();
+		int status = mvcResult.getResponse().getStatus();
+		assertEquals(200, status);
+	}
+
+	@Test
+	void testFindOrderDetails() throws Exception {
+		String uri = URI + "/1";
+		MvcResult mvcResult = this.mvc
+				.perform(MockMvcRequestBuilders.get(uri).contentType(MediaType.APPLICATION_JSON_VALUE)).andReturn();
+
+		int status = mvcResult.getResponse().getStatus();
+		assertEquals(200, status);
+	}
+
+	@Test
+	void testGetAllOrders() throws Exception {
+		String uri = URI + "/all";
+		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri).contentType(MediaType.APPLICATION_JSON_VALUE)).andReturn();
+		int status = mvcResult.getResponse().getStatus();
+		assertEquals(200, status);		
+	}
+
+	@Test
+	void testDeleteOrder() throws Exception {
+		Mockito.when(service.deleteOrder(1)).thenReturn(true);
+        mvc.perform(MockMvcRequestBuilders.delete(URI+"/applications", 1))
+                .andExpect(status().isOk());
+//		String uri = URI + "/1";
+//		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.delete(uri)).andReturn();
+//		int status = mvcResult.getResponse().getStatus();
+//		assertEquals(200, status);
+	}
+
+	@Test
+	void testGetdeliveryDetail() throws Exception {
+		String uri = URI + "/deliveryDetail/1";
+		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri).contentType(MediaType.APPLICATION_JSON_VALUE)).andReturn();
+		int status = mvcResult.getResponse().getStatus();
+		assertEquals(200, status);	
+	}
+
+}

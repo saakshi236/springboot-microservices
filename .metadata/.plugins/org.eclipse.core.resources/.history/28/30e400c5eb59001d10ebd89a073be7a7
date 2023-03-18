@@ -1,0 +1,88 @@
+package com.mindtree.omf.rss;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
+import java.util.Arrays;
+import java.util.List;
+import org.springframework.web.context.WebApplicationContext;
+
+import org.junit.Before;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MockMvcBuilder;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
+import static org.assertj.core.api.Assertions.assertThat;
+import com.mindtree.omf.rss.controller.RestaurantController;
+import com.mindtree.omf.rss.entity.Restaurant;
+import com.mindtree.omf.rss.repository.RestaurantRepository;
+import com.mindtree.omf.rss.service.RestaurantServiceImpl;
+
+@SpringBootTest
+@ExtendWith(MockitoExtension.class)
+@RunWith(JUnitPlatform.class)
+class RestaurantControllerTest {
+
+	@InjectMocks
+	private RestaurantController controller;
+
+	@Mock
+	RestaurantServiceImpl service;
+
+	@Autowired
+	WebApplicationContext webApplicationContext;
+	
+	MockMvc mvc;
+
+	@Before
+	protected void setUp() {
+		mvc = MockMvcBuilders.standaloneSetup(controller).build();
+	}
+
+	@Test
+	public void contextLoads() throws Exception {
+		assertThat(controller).isNotNull();
+	}
+
+	@Test
+	public void testfindByLocation() throws Exception {
+//		MockHttpServletRequest request = new MockHttpServletRequest();
+//		RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+//		when(controller.filterByLocation(any(String.class))).thenReturn(Arrays.asList(
+//				new Restaurant(1, "Test Name", "Test Loc", 10)));
+//		Restaurant restaurantObj = new Restaurant(1, "Test Name", "Test Loc", 10);
+//		List<Restaurant> response = controller.filterByLocation("Nadiad");
+//		assertThat(response.equals(restaurantObj));
+		String uri = "/location=Nadiad";
+		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri).contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andReturn();
+
+		int status = mvcResult.getResponse().getStatus();
+	}
+
+	@Test
+	public void testfindByName() {
+		MockHttpServletRequest request = new MockHttpServletRequest();
+		RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+		when(controller.filterByName(any(String.class)))
+				.thenReturn(Arrays.asList(new Restaurant(1, "Test Name", "Test Loc", 10)));
+		Restaurant restaurantObj = new Restaurant(1, "Test Name", "Test Loc", 10);
+		List<Restaurant> response = controller.filterByName("Nadiad");
+		assertThat(response.equals(restaurantObj));
+	}
+}

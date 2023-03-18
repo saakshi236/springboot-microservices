@@ -1,0 +1,39 @@
+package com.mindtree.omf.rss;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class RestaurantServiceImplTest {
+
+	@Test
+	void testGetRestaurants() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testGetMenu() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testFilterByLocation() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testFilterByName() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testFilterByCuisine() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testGetCuisine() {
+		fail("Not yet implemented");
+	}
+
+}

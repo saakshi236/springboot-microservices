@@ -1,0 +1,61 @@
+package com.mindtree.omf.rss;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.mindtree.omf.rss.controller.RestaurantController;
+import com.mindtree.omf.rss.repository.RestaurantRepository;
+
+@SpringBootTest
+@ExtendWith(MockitoExtension.class)
+@RunWith(JUnitPlatform.class)
+class RestaurantServiceImplTest {
+	
+	@Autowired
+	private RestaurantController controller;
+	@Mock
+	RestaurantRepository restaurantRepository;
+
+	@Test
+	void testGetRestaurants() {
+		
+		when(null)
+		
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testGetMenu() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testFilterByLocation() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testFilterByName() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testFilterByCuisine() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testGetCuisine() {
+		fail("Not yet implemented");
+	}
+
+}

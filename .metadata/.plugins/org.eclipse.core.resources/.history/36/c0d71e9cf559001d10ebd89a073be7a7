@@ -1,0 +1,110 @@
+package com.mindtree.omf.oms;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import com.google.gson.Gson;
+import com.mindtree.omf.oms.controller.OrderController;
+import com.mindtree.omf.oms.entity.Order;
+import com.mindtree.omf.oms.service.OrderServiceImpl;
+
+@SpringBootTest
+@ExtendWith(MockitoExtension.class)
+@RunWith(JUnitPlatform.class)
+@AutoConfigureMockMvc
+class OrderControllerTest {
+	@Autowired
+	private MockMvc mvc;
+	
+	@InjectMocks
+	private OrderController controller;
+	
+	@Mock
+	OrderServiceImpl service;
+	
+	private final String URI = "http://localhost:9002/order";
+
+	@Test
+	void testGetTotalAmount() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testSaveOrderDetails() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testSaveChangedOrderDetails() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testFindOrderDetails() throws Exception {
+		String uri = URI + "/1";
+		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri).contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andReturn();
+
+		int status = mvcResult.getResponse().getStatus();
+		assertEquals(200, status);
+		
+		String content = mvcResult.getResponse().getContentAsString();
+		Order order = new Gson().fromJson(content, Order.class);
+		assertTrue(order != null);
+	}
+
+	@Test
+	void testGetAllOrders() throws Exception {
+		String uri = URI + "/all";
+		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri).contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andReturn();
+
+		int status = mvcResult.getResponse().getStatus();
+		assertEquals(200, status);
+		
+		String content = mvcResult.getResponse().getContentAsString();
+		List<Order> orderList = new Gson().fromJson(content, List.class);
+		assertTrue(!orderList.isEmpty());
+	}
+
+	@Test
+	void testDeleteOrder() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testGetdeliveryDetail() {
+		fail("Not yet implemented");
+	}
+
+//	@Test
+//	void testGetRestaurants() throws Exception {
+//		String uri = URI + "/list";
+//		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri).contentType(MediaType.APPLICATION_JSON_VALUE))
+//				.andReturn();
+//
+//		int status = mvcResult.getResponse().getStatus();
+//		assertEquals(200, status);
+//		
+//		String content = mvcResult.getResponse().getContentAsString();
+//		List<Restaurant> restaurantList = new Gson().fromJson(content, List.class);
+//		assertTrue(!restaurantList.isEmpty());
+//	}
+
+}

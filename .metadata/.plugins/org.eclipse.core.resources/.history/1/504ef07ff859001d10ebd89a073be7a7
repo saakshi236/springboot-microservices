@@ -1,0 +1,46 @@
+package com.mindtree.omf.oms;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class OrderControllerTest {
+
+	@Test
+	void testGetTotalAmount() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testSaveOrderDetails() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testSaveChangedOrderDetails() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testFindOrderDetails() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testGetAllOrders() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testDeleteOrder() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testGetdeliveryDetail() {
+		fail("Not yet implemented");
+	}
+
+}

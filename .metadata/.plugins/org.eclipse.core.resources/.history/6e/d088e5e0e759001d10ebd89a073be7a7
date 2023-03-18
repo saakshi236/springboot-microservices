@@ -1,0 +1,41 @@
+package com.mindtree.omf.userinfoservice;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
+import org.assertj.core.util.Arrays;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.mindtree.omf.uis.model.Order;
+import com.mindtree.omf.uis.model.User;
+import com.mindtree.omf.uis.repository.UserRepository;
+import com.mindtree.omf.uis.service.UserServiceImpl;
+
+@ExtendWith(MockitoExtension.class)
+@RunWith(JUnitPlatform.class)
+class UserServiceImplTest {
+	
+	@InjectMocks
+	private UserServiceImpl service;
+
+	@Mock
+	UserRepository restaurantRepository;
+	
+	private User user = new User(1, "Test Name");
+	
+	@Test
+	void testFindUser() {
+		when(service.findUser(any(Integer.class))).thenReturn(user);
+		assertTrue(user.equals(service.saveOrder(user)));
+	}
+
+}

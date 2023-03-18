@@ -1,0 +1,52 @@
+package com.mindtree.omf.rss.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.mindtree.omf.rss.entity.Cuisine;
+import com.mindtree.omf.rss.entity.Restaurant;
+import com.mindtree.omf.rss.service.RestaurantServiceImpl;
+
+@RestController
+@RequestMapping("/restaurant")
+public class RestaurantController {
+	
+	@Autowired
+	RestaurantServiceImpl service;
+
+	@GetMapping("/list")
+	public List<Restaurant> getRestaurants() {
+		return service.getRestaurants();
+	}
+
+	@GetMapping("/menu/{id}")
+	public List<Cuisine> getMenu(@PathVariable int id) {
+		System.err.println(id);
+		return service.getMenu(id);
+	}
+	
+	@GetMapping("/cuisine/{id}")
+	public Cuisine getCuisine(@PathVariable int id) {
+		return service.getCuisine(id);
+	}
+	
+	@GetMapping("/location={location}")
+	public List<Restaurant> filterByLocation(@PathVariable String location) {
+		return service.filterByLocation(location);
+	}
+	
+	@GetMapping("/name={name}")
+	public List<Restaurant> filterByName(@PathVariable String name) {
+		return service.filterByName(name);
+	}
+	
+	@GetMapping("/cuisine={name}")
+	public List<Cuisine> filterByCuisine(@PathVariable String name) {
+		return service.filterByCuisine(name);
+	}
+}

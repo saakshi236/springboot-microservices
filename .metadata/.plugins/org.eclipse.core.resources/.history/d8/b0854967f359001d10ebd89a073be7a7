@@ -1,0 +1,117 @@
+package com.mindtree.omf.rss;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.IOException;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.mindtree.omf.rss.controller.RestaurantController;
+import com.mindtree.omf.rss.entity.Restaurant;
+import com.mindtree.omf.rss.service.RestaurantServiceImpl;
+
+@SpringBootTest
+@ExtendWith(MockitoExtension.class)
+@RunWith(JUnitPlatform.class)
+@AutoConfigureMockMvc
+class RestaurantControllerTest {
+
+	@InjectMocks
+	private RestaurantController controller;
+
+	@Mock
+	RestaurantServiceImpl service;
+
+	@Autowired
+	private MockMvc mvc;
+
+	@Test
+	public void contextLoads() throws Exception {
+		assertThat(controller).isNotNull();
+	}
+
+	protected String mapToJson(Object obj) throws JsonProcessingException {
+		ObjectMapper objectMapper = new ObjectMapper();
+		return objectMapper.writeValueAsString(obj);
+	}
+
+	protected <T> T mapFromJson(String json, Class<T> clazz)
+			throws JsonParseException, JsonMappingException, IOException {
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		return objectMapper.readValue(json, clazz);
+	}
+
+	private final String URI = "http://localhost:9001/restaurant";
+
+	@Test
+	void testGetRestaurants() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testGetMenu() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testGetCuisine() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testFilterByLocation() throws Exception {
+		String uri = URI + "/location=Nadiad";
+		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri).contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andReturn();
+
+		int status = mvcResult.getResponse().getStatus();
+		assertEquals(200, status);
+	}
+
+	@Test
+	void testFilterByName() throws Exception {
+		String uri = URI + "/name=Sunflower";
+		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri).contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andReturn();
+
+		int status = mvcResult.getResponse().getStatus();
+		assertEquals(200, status);
+		String content = mvcResult.getResponse().getContentAsString();
+		System.err.println(content);
+		System.err.println(new Gson().fromJson(content, List.class));
+		List<Restaurant> restaurant = new Gson().fromJson(content, List.class);
+		assertTrue(restaurant != null);
+	}
+
+	@Test
+	void testFilterByCuisine() throws Exception {
+		String uri = URI + "/cuisine=Thepla";
+		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri).contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andReturn();
+
+		int status = mvcResult.getResponse().getStatus();
+		assertEquals(200, status);
+	}
+
+}
